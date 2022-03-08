@@ -56,7 +56,15 @@ def show_services():
 
 
 def get_password():
-    pass
+    oldServico = servico2.get()
+    cursor.execute(f'''
+    SELECT username, password FROM users
+    WHERE service = '{oldServico}'
+    ''')
+    for user in cursor.fetchall():
+        print(user)
+        return resposta2.config(text=user)
+    return resposta2.config(text='Nao encontrado')
 
 
 window = Tk()
