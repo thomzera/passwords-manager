@@ -67,6 +67,13 @@ def get_password():
     return resposta.config(text='Serviço não encontrado!')
 
 
+# Funcao que limpa o label de output 'resposta'
+
+
+def clean_resposta():
+    return resposta.config(text='')
+
+
 window = Tk()
 window.geometry('900x600')          # Largura x Altura + dist esq + dist dir
 window.title('Password Manager')    # Titulo da pagina
@@ -135,11 +142,15 @@ servico2.place(x=150, y=280, width=200, height=25)  # recover pass
 button1 = Button(text='Add service', command=add_new_service)
 button2 = Button(text='Show services', command=show_services)
 button3 = Button(text='Recover Password', command=get_password)
+button4 = Button(text='Clean', command=clean_resposta)
 
 # Posicionando os botoes
 button1.place(x=30, y=160, width=120, height=35)
 button2.place(x=160, y=160, width=120, height=35)
 button3.place(x=30, y=320, width=120, height=35)
+button4.place(x=30, y=440, width=120, height=35)
 
+
+# Roda o programa e fecha conexao com banco de dados
 window.mainloop()
 conn.close()
