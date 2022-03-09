@@ -63,14 +63,16 @@ def get_password():
     ''')
     for user in cursor.fetchall():
         print(user)
-        return resposta2.config(text=user)
-    return resposta2.config(text='Nao encontrado')
+        return resposta.config(text=user)
+    return resposta.config(text='Serviço não encontrado!')
 
 
 window = Tk()
-window.geometry('600x600')
-window.title('Password Manager')
-window.iconbitmap('passico.ico')
+window.geometry('900x600')          # Largura x Altura + dist esq + dist dir
+window.title('Password Manager')    # Titulo da pagina
+window.iconbitmap('passico.ico')    # Icone superior esquerdo da pagina
+# Trava redimensionamento da janela
+window.resizable(height=False, width=False)
 
 # Erros
 error = Message(text="", width=160)
@@ -90,8 +92,7 @@ label4 = Label(text='Enter Service: ')
 label5 = Label(text='Quer resgatar uma senha? Procure pelo serviço')
 
 # Labels de output
-resposta = Label(window, font='Arial 15', text='')
-resposta2 = Label(window, font='Arial 15', text='0')
+resposta = Label(window, font='Arial 15', text='', wraplength=500)
 
 # Posicionando labels
 label1.place(x=30, y=40)
@@ -101,8 +102,7 @@ label4.place(x=30, y=280)
 label5.place(x=30, y=240)
 
 # Posicionando Labels de output
-resposta.place(x=15, y=5, width=400, height=35)
-resposta2.place(x=15, y=360, width=200, height=35)
+resposta.place(x=380, y=40, width=400, height=400)
 
 # Configurando labels
 label1.config(bg='lightgreen', padx=0)
