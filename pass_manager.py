@@ -36,13 +36,11 @@ def add_new_service():
     conn.commit()
 
 
-list_services = []
-
-
 # Funcao que mostra os servicos salvos
 
 
 def show_services():
+    list_services = []
     cursor.execute('''
         SELECT service FROM users;
     ''')
@@ -67,6 +65,18 @@ def get_password():
     return resposta.config(text='Serviço não encontrado!')
 
 
+# Funcao que deleta um servico
+
+
+def delete_service():
+    oldServico = servico2.get()
+    cursor.execute(f'''
+    DELETE FROM users WHERE service = '{oldServico}'
+    ''')
+    conn.commit()
+    return resposta.config(text='Usuario deletado!')
+
+
 # Funcao que limpa o label de output 'resposta'
 
 
@@ -74,6 +84,7 @@ def clean_resposta():
     return resposta.config(text='')
 
 
+# Configuracoes da janela
 window = Tk()
 window.geometry('900x600')          # Largura x Altura + dist esq + dist dir
 window.title('Password Manager')    # Titulo da pagina
@@ -143,14 +154,16 @@ button1 = Button(text='Add service', command=add_new_service)
 button2 = Button(text='Show services', command=show_services)
 button3 = Button(text='Recover Password', command=get_password)
 button4 = Button(text='Clean', command=clean_resposta)
+button5 = Button(text='Delete service', command=delete_service)
 
 # Posicionando os botoes
 button1.place(x=30, y=160, width=120, height=35)
 button2.place(x=160, y=160, width=120, height=35)
 button3.place(x=30, y=320, width=120, height=35)
 button4.place(x=30, y=440, width=120, height=35)
+button5.place(x=160, y=320, width=120, height=35)
 
-
-# Roda o programa e fecha conexao com banco de dados
+# Roda o programa
 window.mainloop()
+# Fecha conexao com o banco de dados
 conn.close()
